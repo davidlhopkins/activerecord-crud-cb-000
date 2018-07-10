@@ -13,10 +13,10 @@ def can_be_created_with_a_hash_of_attributes
       lead: "Paul Newman",
       in_theaters: false
   }
-  movie = Movie.new(attributes)
-movie.save
-movie
+  movie = Movie.create(attributes)
 end
+
+
 
 def can_be_created_in_a_block(args = {})
   Movie.create do |m|
@@ -67,9 +67,8 @@ def can_update_multiple_items_at_once
   5.times do |i|
     Movie.create(title: "Movie_#{i}", release_date: 2000+i)
   end
-  Movie.where("release_date >= 2000").find_each do |m|
-  m.update(title: "A Movie")
-  end
+  Movie.all.each{|movie|
+  movie.update(title: "A Movie")}
 end
 
 def can_destroy_a_single_item
